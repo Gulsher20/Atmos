@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-paper font-body text-ink antialiased;
+    min-height: 100dvh;
+  }
+
+  :focus-visible {
+    outline: 3px solid #0e0e0e;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px #ffd400;
+  }
+
+  ::selection {
+    @apply bg-sun text-ink;
+  }
+}
+
+@layer components {
+  .b-card {
+    @apply relative border-3 border-ink bg-paper shadow-brutal;
+  }
+
+  .b-card-hover {
+    @apply transition-[transform,box-shadow] duration-150 ease-out hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal-lg;
+  }
+
+  .b-title {
+    @apply font-display uppercase leading-[0.9] tracking-tight;
+  }
+
+  .b-label {
+    @apply font-mono text-[11px] font-bold uppercase tracking-[0.14em];
+  }
+
+  .b-btn {
+    @apply inline-flex select-none items-center justify-center gap-2 border-3 border-ink bg-paper px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider shadow-brutal-sm transition-[transform,box-shadow,background-color] duration-100 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal active:translate-x-[3px] active:translate-y-[3px] active:shadow-none disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .b-btn-sun {
+    @apply bg-sun;
+  }
+
+  .b-btn-flame {
+    @apply bg-flame text-ink;
+  }
+
+  .b-btn-ink {
+    @apply bg-ink text-paper;
+  }
+
+  .b-input {
+    @apply w-full border-3 border-ink bg-white px-3 py-2.5 font-mono text-sm shadow-brutal-sm outline-none placeholder:text-ink/40 focus:bg-sun/20;
+  }
+
+  .b-chip {
+    @apply inline-flex items-center gap-1 border-2 border-ink px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider;
+  }
+
+  .b-icon-box {
+    @apply flex shrink-0 items-center justify-center border-3 border-ink;
+  }
+
+  .b-section-title {
+    @apply b-title flex items-center gap-3 text-3xl sm:text-4xl;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .stagger > * {
+    @apply animate-rise;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  .text-outline {
+    -webkit-text-stroke: 2px #0e0e0e;
+    color: transparent;
+  }
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition:
+    opacity 0.22s ease,
+    transform 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(24px) skewY(1deg);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-12px);
+}
+
+.expand-enter-active,
+.expand-leave-active {
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.expand-enter-from,
+.expand-leave-to {
+  opacity: 0;
+  max-height: 0;
+}
+
+.expand-enter-to,
+.expand-leave-from {
+  max-height: 900px;
+}
+
+.toast-enter-active,
+.toast-leave-active {
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+
+.toast-enter-from {
+  opacity: 0;
+  transform: translateX(110%) rotate(4deg);
+}
+
+.toast-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
